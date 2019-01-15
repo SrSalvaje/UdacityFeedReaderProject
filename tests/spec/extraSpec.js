@@ -32,7 +32,7 @@ $(function() {
         it("urls are defined and have an url", function () {
             for(let f of allFeeds){
                 expect(f.url).toBeDefined();
-                expect(f.url.length>0).toBe(true);
+                expect(f.url.length).toBeGreaterThan(0);
             }
         });
 
@@ -44,7 +44,7 @@ $(function() {
         it("check that objects in allFeeds have a name", function () {
             for(let f of allFeeds){
                 expect(f.name).toBeDefined();
-                expect(f.name.length>0).toBe(true);
+                expect(f.name.length).toBeGreaterThan(0);
             }
         });
     });
@@ -59,15 +59,17 @@ $(function() {
          */
         it("check menu us hidden", function () {
             const b = document.querySelector("body");
+            
+            expect(b).toHaveClass("menu-hidden"); 
     
-            expect(b.classList.contains("menu-hidden")).toBe(true); 
+            //expect(b.classList.contains("menu-hidden")).toBeTruthy(); 
         });
         /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-         it("Menu toggle on/off", function () {
+        it("Menu toggle on/off", function () {
             const b = document.querySelector("body");
             const menu = document.querySelector(".menu-icon-link");
             //if the menu is hidden
@@ -75,16 +77,17 @@ $(function() {
                 //click it
                 menu.click();
                 //and expect it to become visible
-                expect(b.classList.contains("menu-hidden")).toBe(false);
+                expect(b).not.toHaveClass("menu-hidden");
+                //expect(b.classList.contains("menu-hidden")).toBeFalsy();
                 //if it is already visble
             }else if(b.classList.contains("menu-hidden")!== true){
                 menu.click();
                 //it should become hidden
-                expect(b.classList.contains("menu-hidden")).toBe(true);
+                expect(b).toHaveClass("menu-hidden");
+                //expect(b.classList.contains("menu-hidden")).toBeTruthy();
             }
 
             //at the end of the test suit hide the menu if it is visible
-
             if(b.classList.contains("menu-hidden")!== true){ 
                 menu.click();
             }
@@ -93,7 +96,7 @@ $(function() {
     
     /* TODO: Write a new test suite named "Initial Entries" */
     describe("Initial Entries", function () {
-        
+
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
