@@ -50,6 +50,8 @@ $(function() {
     });
 
     describe("The menu", function(){
+        const b = document.querySelector("body");
+        const menu = document.querySelector(".menu-icon-link");
         /* TODO: Write a new test suite named "The menu" */
 
         /* TODO: Write a test that ensures the menu element is
@@ -58,11 +60,7 @@ $(function() {
          * hiding/showing of the menu element.
          */
         it("check menu us hidden", function () {
-            const b = document.querySelector("body");
-            
-            expect(b).toHaveClass("menu-hidden"); 
-    
-            //expect(b.classList.contains("menu-hidden")).toBeTruthy(); 
+            expect(b).toHaveClass("menu-hidden");  
         });
         /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
@@ -70,21 +68,18 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
         it("Menu toggle on/off", function () {
-            const b = document.querySelector("body");
-            const menu = document.querySelector(".menu-icon-link");
+            
             //if the menu is hidden
             if(b.classList.contains("menu-hidden")){
                 //click it
                 menu.click();
                 //and expect it to become visible
                 expect(b).not.toHaveClass("menu-hidden");
-                //expect(b.classList.contains("menu-hidden")).toBeFalsy();
                 //if it is already visble
             }else if(b.classList.contains("menu-hidden")!== true){
                 menu.click();
                 //it should become hidden
                 expect(b).toHaveClass("menu-hidden");
-                //expect(b.classList.contains("menu-hidden")).toBeTruthy();
             }
 
             //at the end of the test suit hide the menu if it is visible
