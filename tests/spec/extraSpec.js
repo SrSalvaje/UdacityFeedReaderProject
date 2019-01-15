@@ -67,6 +67,27 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+         it("Menu toggle on/off", function () {
+            const b = document.querySelector("body");
+            const menu = document.querySelector(".menu-icon-link");
+            //if the menu is hidden
+            if(b.classList.contains("menu-hidden")){
+                //click it
+                menu.click();
+                //and expect it to become visible
+                expect(b.classList.contains("menu-hidden")).toBe(false);
+                //if it is already visble
+            }else if(b.classList.contains("menu-hidden")!== true){
+                menu.click();
+                //it should become hidden
+                expect(b.classList.contains("menu-hidden")).toBe(true);
+            }
+
+            //at the end of the test suit hide the menu if it is visible
+            
+            if(b.classList.contains("menu-hidden")!== true){ 
+                menu.click();
+            }
         
         });
     });
