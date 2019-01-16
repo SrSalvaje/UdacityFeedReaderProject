@@ -116,35 +116,34 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        let
+        const feedContent = document.querySelector(".feed").children;//gets the links of the currently loaded feed
+        let feed1=[];
+        let feed2=[];
+        const uniqueLinks= new Set([]);//use set to ensure that links from each feed are not duplicates
+       
+        
         beforeEach(function(done){
-            loadFeed(0, done);
-        });
-        //
-        it("Feeds load new content", function(/* done */){
-            const listOfFeeds = document.querySelector(".feed-list").children;//the different feeds
-            //linksOfFeeds = listOfFeeds.children;
-            let loadedLinks=document.querySelector(".feed").children;
-            let linkStorage=new Set(loadedLinks),
-                initialLength= linkStorage.size,
-                newLength;
-
-
-            for(let i=1;i<listOfFeeds.length;i++){
-                loadFeed(i, function() {
-                    for(let link of loadedLinks){
-                        linkStorage.add(link);    
-                    }
-                    //done();  
+            loadFeed(0, function () {//load first feed
+                Array.from(feedContent).forEach(function(entry){
+                    feed1.push(entry);//store the links in array
+                    uniqueLinks.add(entry);//add the links to the set
                 });
-                
-                newLength=linkStorage.size;
-                expect(newLength).toBeGreaterThan(initialLength);
-                initialLength=newLength;
-            }
-              
+                loadFeed(1,done);//load the second feed and let jasmine know its done     
+            });  
         });
-        //
+
+        it("Feeds load new content", function () {
+            Array.from(feedContent).forEach(function(entry){
+                feed2.push(entry);//store the links of the second feed in array
+                uniqueLinks.add(entry);//add them to the set
+            });
+            //because sets dont allow duplicate values, if the links from each feed stored in the arrays are unique,
+            //the size of the set should be the same as length of the sum of both arrays, otherwise we know that
+            //there is a duplicate link
+            expect(feed1.length+feed2.length).toBe(uniqueLinks.size);   
+        });
+        
     });
 
 }());
+
