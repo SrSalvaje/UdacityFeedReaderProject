@@ -104,16 +104,47 @@ $(function() {
         it("loads feed", function () {
             const feed = document.querySelector(".feed");
             expect(feed.children.length).toBeGreaterThan(0);            
-        })
+        });
         
     });
 
     
 
     /* TODO: Write a new test suite named "New Feed Selection" */
-
-    /* TODO: Write a test that ensures when a new feed is loaded
+    describe("New Feed Selection", function () {
+        /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        let
+        beforeEach(function(done){
+            loadFeed(0, done);
+        });
+        //
+        it("Feeds load new content", function(/* done */){
+            const listOfFeeds = document.querySelector(".feed-list").children;//the different feeds
+            //linksOfFeeds = listOfFeeds.children;
+            let loadedLinks=document.querySelector(".feed").children;
+            let linkStorage=new Set(loadedLinks),
+                initialLength= linkStorage.size,
+                newLength;
+
+
+            for(let i=1;i<listOfFeeds.length;i++){
+                loadFeed(i, function() {
+                    for(let link of loadedLinks){
+                        linkStorage.add(link);    
+                    }
+                    //done();  
+                });
+                
+                newLength=linkStorage.size;
+                expect(newLength).toBeGreaterThan(initialLength);
+                initialLength=newLength;
+            }
+              
+        });
+        //
+    });
+
 }());
