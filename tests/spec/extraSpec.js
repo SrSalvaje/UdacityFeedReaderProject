@@ -28,30 +28,24 @@ $(function() {
     });
 
     describe("The menu", function(){
-       /* test that ensures the menu element is
+        /* test that ensures the menu element is
          * hidden by default. */
         const b = document.querySelector("body");
         const menu = document.querySelector(".menu-icon-link");
        
-        it("check menu us hidden", function () {
+        it("check menu is hidden", function () {
             expect(b).toHaveClass("menu-hidden");  
         });
         /*  ensures the menu changes visibility when the menu icon is clicked.*/
         it("Menu toggle on/off", function () {
-            
-            //if the menu is hidden
-            if(b.classList.contains("menu-hidden")){
-                //click it
-                menu.click();
-                //and expect it to become visible
-                expect(b).not.toHaveClass("menu-hidden");
-                //if it is already visble
-            }else if(b.classList.contains("menu-hidden")!== true){
-                menu.click();
-                //it should become hidden
-                expect(b).toHaveClass("menu-hidden");
-            }
-
+            //when menu is clicked
+            menu.click();
+            //and expect it to become visible
+            expect(b).not.toHaveClass("menu-hidden");
+            //when clicked again
+            menu.click();
+            //it should become hidden
+            expect(b).toHaveClass("menu-hidden");
             //at the end of the test suit hide the menu if it is visible
             if(b.classList.contains("menu-hidden")!== true){ 
                 menu.click();
