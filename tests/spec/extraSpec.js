@@ -8,21 +8,18 @@ $(function() {
     describe("RSS Feeds", function() {
         
         it("are defined", function() {
-            expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
+            expect(allFeeds).toBeTruthy();
         });
        
         it("urls are defined and have an url", function () {
             for(let f of allFeeds){
-                expect(f.url).toBeDefined();
-                expect(f.url.length).toBeGreaterThan(0);
+                expect(f.url).toBeTruthy();
             }
         });
 
         it("check that objects in allFeeds have a name", function () {
             for(let f of allFeeds){
-                expect(f.name).toBeDefined();
-                expect(f.name.length).toBeGreaterThan(0);
+                expect(f.name).toBeTruthy();
             }
         });
     });
