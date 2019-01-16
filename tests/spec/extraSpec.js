@@ -40,7 +40,7 @@ $(function() {
         it("Menu toggle on/off", function () {
             //when menu is clicked
             menu.click();
-            //and expect it to become visible
+            //expect it to become visible
             expect(b).not.toHaveClass("menu-hidden");
             //when clicked again
             menu.click();
@@ -60,9 +60,11 @@ $(function() {
         beforeEach(function(done){
             loadFeed(0, done);
         });
+
         it("loads feed", function () {
-            const feed = document.querySelector(".feed");
-            expect(feed.children.length).toBeGreaterThan(0);            
+            //selects all .entry elements held by the .feed element
+            const feed = document.querySelectorAll(".feed .entry"); 
+            expect(feed.length).toBeGreaterThan(0);            
         });
         
     });
